@@ -1,0 +1,58 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<!-- 微博用户登陆页面  -->
+<html lang="en">
+    <head>
+        <title>微博登陆</title>
+        <meta charset="utf-8">
+        <meta name="keywords" content="微博,腾讯微博,QQ微博,围脖,QQ围脖,腾讯围脖,企鹅微博,企鹅围脖,名人微博,名人围脖,微型博客"/>
+        <meta name="description" content="腾讯微博 与其在别处仰望 不如在这里并肩"/>
+        <link rel="stylesheet" href="/Public/Home/css/login.css" />
+    </head>
+    <body>
+        <div class="logo">
+            <img src="/Public/Home/images/logo.png" alt="" />
+        </div>
+        <div class="login">
+            <div>
+                <!-- 微频道start -->
+                <h1>微频道，发现更多精彩</h1>
+                <div class="cimg">
+                    <a href="#">
+                        <img src="/Public/Home/images/wpd1.jpg" alt="美女" />
+                    </a>
+                    <div class="top">
+                        <a href="#"><img src="/Public/Home/images/wpd2.jpg" alt="杂谈" /></a>
+                        <a href="#"><img src="/Public/Home/images/wpd3.jpg" alt="时尚" /></a>
+                        <a href="#"><img src="/Public/Home/images/wpd4.jpg" alt="摄影" /></a>
+                    </div>
+                    <div class="bottom">
+                        <a href="#"><img src="/Public/Home/images/wpd5.jpg" alt="星座" />
+                        </a>
+                        <a href="#"><img src="/Public/Home/images/wpd6.jpg" alt="明星" /></a>
+                    </div>
+                </div>
+                <!-- 微频道end-->
+            </div>
+            <div>
+                <!-- 登陆框start -->
+                <h1>帐号登录</h1>
+                <div class="form">
+                <span class="error">sbsb</span>
+                    <form action="<?php echo U('Home/Login/login');?>" method="post">
+                        <div>
+                        <input type="text" name="account" placeholder="请输入您的邮箱" /></div>
+                        <div><input type="password" name="password" placeholder="请输入您的密码" /></div>
+                        <div>
+                        <button type="submit">登 陆</button>
+                        <input type="checkbox" name="auto" value="1" /><span class="remembe">下次自动登录</span>
+                        </div>
+                    </form>
+                    
+                </div>
+                <!-- 登陆框end -->
+                <span class="foo"><a href="<?php echo U('Home/Login/forgetPwd');?>">忘了密码？</a> | <a href="<?php echo U('Home/Login/register');?>" target="_blank">注册新帐号</a> | <a href="#">意见反馈</a>&nbsp;
+                </span>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,171 @@
+<include file='Common:header'/>
+	<title>{$Think.config.WEBNAME}-我的私信</title>
+	<link rel="stylesheet" href="__PUBLIC__/Home/Theme/{$style}/Css/nav.css" />
+	<link rel="stylesheet" href="__PUBLIC__/Home/Theme/{$style}/Css/letter.css" />
+	<link rel="stylesheet" href="__PUBLIC__/Home/Theme/{$style}/Css/bottom.css" />
+	<script type="text/javascript" src='__PUBLIC__/Home/Js/jquery-1.8.3.min.js'></script>
+    <script type="text/javascript" src='__PUBLIC__/Home/Js/nav.js'></script>
+    <script type='text/javascript' src='__PUBLIC__/Home/Js/letter.js'></script>
+    <script type='text/javascript'>
+       
+        var newletter = '{:U("User/newletter")}';
+        var sechnewletter = '{:U("User/sechnewletter")}';
+        //双击刷新
+        var dblurl = "{:U('Home/User/letter')}";
+        //增加聊天对话a链接
+        var singlewei  ="{:U('Home/User/index')}";
+    </script>
+    
+<include file='Common:nav'/>
+<!--==========顶部固定导行条==========-->
+<!--==========内容主体==========-->
+<div style='height:60px;opcity:10'></div>
+</div>
+    <div class="main">
+    <!--=====左侧=====-->
+        <include file='Common:left'/>
+       
+    <!--=====中部=====-->
+    <!-- 如果没有$_GET 就走这个区间 -->
+    <?php if(empty($_GET)): ?> 
+        <div id="middle" class='fleft'>
+			<p class='title'>我的私信（共{$count}条）<span class='send'>发送私信</span></p>
+        <foreach name='letter' item='v'>
+            <?php if(in_array($v['username'],$oldname)) continue; ?>
+ 			<dl>
+				<dt>
+					<a href="{:U('Home/User/index',array('uid'=>$v[uid]))}"><img src="<if condition='$v["face50"]'>__PUBLIC__/{$v.face50}<else/>__PUBLIC__/Home/Images/noface.gif</if>" width='50' height='50'/></a>
+				</dt>
+				<dd>
+					<a href="{:U('Home/User/index',array('uid'=>$v[uid]))}">{$v.username}:</a>
+                    <?php $oldname[]=$v['username'] ?> 
+					<span>{$v.content}</span>
+                    <i style="" class="fright number{$v.uid}"></i>
+                </dd>
+				<dd class='tright'>
+                    <span class="send_time" time="{$v.time}"><?php echo date("y-m-d H:i",$v['time'])?></span>
+					<span class='del-allletter' lid='{$v.from}'>删除</span> &nbsp;|&nbsp;
+					<span class='l-reply' from="{$v.from}">回复</span>
+				</dd>
+			</dl>
+        </foreach>
+        
+        </div>
+    <?php else: ?>
+        <!-- 对话窗 -->
+        <div id="sendto" class="fleft">
+
+            <p class="chating">正在与&nbsp;&nbsp;<i>{$chatusername}</i>&nbsp;&nbsp;对话中</p>
+            <div id="lattermain">
+                <foreach name='letter' item='v'>
+                <dl>
+                    <!-- 排整对话框 -->
+                  <?php if($v['username']==$chatusername): ?>
+                        <!-- 给js抓取from -->
+                        <div class="fromfrom" from="{$v.from}"></div>
+                        <div class="yourmessage">
+                            <dt class="fleft">
+                                <a href="{:U('Home/User/index',array('uid'=>$v[uid]))}"><img src="<if condition='$v["face50"]'>__PUBLIC__{$v.face50}<else/>__PUBLIC__/Home/Images/noface.gif</if>" width='50' height='50'/></a>
+                            </dt>
+                            <dd class="lettermsg">
+                                <span class="fleft" style="padding-left:20px">{$v.content}</span>
+                            </dd>
+                            <dd class='tright'>
+                                <span class="send_time fleft" time="{$v.time}" style="padding-left:20px"><?php echo date("y-m-d H:i",$v['time'])?></span>
+                                <span class='del-letter fleft' lid='{$v.from}' style="padding-left:20px;">删除</span>
+                            </dd>
+                        </div>
+                    <?php else: ?>
+                        <div class="mymessage">
+                            <dt class="fright">
+                                <a href="{:U('Home/User/index',array('uid'=>$v[uid]))}"><img src="<if condition='$v["face50"]'>__PUBLIC__/{$v.face50}<else/>__PUBLIC__/Home/Images/noface.gif</if>" width='50' height='50'/></a>
+                            </dt>
+                            <dd class="lettermsg fright">
+                                <span class="fright" style="padding-right:20px">{$v.content}</span>
+                            </dd>
+                            <dd class="tright fright">
+                                <span class="send_time fright" time="{$v.time}" style="padding-right:20px"><?php echo date("y-m-d H:i",$v['time'])?></span>
+                                <span class='del-letter fright' lid="{$v.from}" style="padding-right:20px">删除</span> 
+                            </dd>
+                        </div>
+                    <?php endif; ?>
+                </dl>
+                 </foreach> 
+                
+            </div>
+            <div id='privatemsg'>
+                <div class='send-cons'>
+                    <textarea></textarea>
+                </div>
+                <div class='lt-btn-wrap'>
+                    <input  value='发送' class='send-lt-hu'/>
+                </div>
+            </div>
+        
+        </div>
+            <!-- 发送框 -->
+    <?php endif; ?>
+        <!-- 结束对话框 -->
+<!--==========右侧==========-->
+        <include file='Common:right'/>
+    </div>
+<!--==========内容主体结束==========-->
+
+<!--私信弹出框-->
+<div id='letter'>
+   
+        <div class="letter_head">
+            <span class='letter_text fleft'>发送私信</span>
+        </div>
+        <div class='send-user'>
+            用户昵称：<input type="text" name='infousername' />
+        </div>
+        <div class='send-cons'>
+            内容：<textarea name="content"></textarea>
+        </div>
+        <div class='lt-btn-wrap'>
+            <input  value='发送' class='send-lt-sub'/>
+            <span class='letter-cencle'>取消</span>
+        </div>
+    
+</div>
+<!--==========底部==========-->
+<include file='Common:bottom'/>
+<!-- 动态创建对话框 -->
+<?php if(!empty($_GET['from'])): ?>
+<script type="text/javascript">
+    var newtop = $('#lattermain').find('dt:last').offset().top;
+    // alert(newtop);
+    $('#lattermain').scrollTop(newtop);
+    var scrolltop = $('#lattermain').scrollTop();
+    var from = $('.fromfrom').attr('from');
+        var fromletter = setInterval(function(){
+             $.post(sechnewletter,{from:from},function(data){
+                if(data!=null){
+                   for (var i = 0; i <  data.length; i++) {
+                        var newmykuang =  $('<dl><dt class="fleft">\n\
+                             <a href="'+singlewei+'?uid='+data[i]["uid"]+'"><img src="/Public/Images/Home/noface.gif</if>" width="50" height="50"/></a>\n\
+                             </dt>\n\
+                             <dd class="lettermsg fleft">\n\
+                                 <span class="fleft" style="padding-left:20px">'+data[i]["content"]+'</span>\n\
+                             </dd>\n\
+                             <dd class="tright fleft">\n\
+                                 <span class="send_time fleft" time="'+data[i]["time"]+'" style="padding-right:20px"><?php echo date("y-m-d H:i",'+data[i]["time"]+')?></span>\n\
+                                 <span class="del-letter fleft" lid="{$v.from}" style="padding-right:20px">删除</span> \n\
+                             </dd></dl>');
+                        newmykuang.find('.send_time').attr('time',data[i]['time']).html(data[i]["newtime"]);
+                        newmykuang.find('.del-letter').attr('lid',data[i]['from']); 
+                        if(data[i]['face50']!=''){
+                            newmykuang.find('img').attr('src','/Public'+data[i]['face50']);
+                        }
+                        $('#lattermain').append(newmykuang);  
+                        // var lattermain = $('#lattermain').find('dt:last').offset().top;
+                        var latteheight = $('#lattermain').find('dt:last').height();
+                        // alert(lattermain+latteheight);
+                        $('#lattermain').scrollTop(scrolltop+latteheight+1000);
+                   };
+                }
+             },'json');
+          },10000);
+</script>
+<?php endif; ?>

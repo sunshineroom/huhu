@@ -1,0 +1,83 @@
+<include file='Common:header'/>
+    <title>{$Think.config.WEBNAME}-首页</title>
+    <link rel="stylesheet" href="__PUBLIC__/Home/Theme/default/Css/nav.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Home/Theme/default/Css/index.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Home/Theme/default/Css/bottom.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Home/Uploadify/uploadify.css"/>
+    <script type="text/javascript" src='__PUBLIC__/Home/Js/jquery-1.8.3.min.js'></script>
+    <script type="text/javascript" src='__PUBLIC__/Home/Js/nav.js'></script>
+    <script type="text/javascript" src='__PUBLIC__/Home/Uploadify/jquery.uploadify.min.js'></script>
+    <script type="text/javascript" src='__PUBLIC__/Home/Js/index.js'></script>
+    <script type='text/javascript'>
+        var PUBLIC = '__PUBLIC__';
+        var uploadUrl = '{:U("Home/Common/uploadPic")}';
+        var uid = '{$_SESSION["uid"]}';
+        var getWeibo = '{:U("Home/Index/getWeibo")}';
+        var getTurnWeibo = '{:U("Home/Index/getTurnWeibo")}'
+        var clickZan = '{:U("Home/Common/clickZan")}';
+        var commentUrl = "{:U('Home/common/comment')}";
+        var getComment = '{:U("Home/Common/getComment")}';
+        var keepUrl = '{:U("Home/Common/keep")}';
+        var delWeibo = '{:U("Home/Index/delWeibo")}';
+        //我的
+        var newletter = '{:U("User/newletter")}';
+        var id="id";
+        var local_url = document.location.href; 
+          //获取要取得的get参数位置
+        var get = local_url.indexOf(id +"=");
+        if(get>0){
+              //截取字符串获得id
+            var get_par = local_url.slice(id.length + get + 1); 
+        }else{
+            get_par = '';
+        }
+        //发送ajax来实时发现@我的
+        var atmemeurl = '{:U("Common/atmemeurl")}';
+    </script>
+<include file='Common:nav'/>
+<!--==========内容主体==========-->
+<div style='height:60px;opcity:10'></div>
+    <?php $user = M('userinfo');$user = $user->where('uid='.session("uid"))->select();?> 
+	<div id="huiyuan">
+		<div id="huimain">
+		<form action="{:U("Home/Common/vip")}" method="post">
+			<ul>
+				<div class="fleft kai">开通对象:</div>
+				<input class="fleft name" type="text" value="<?php echo $user[0]['username']; ?>" name="huiyuanname">
+				<div class="fright other">给他人开通</div>
+			</ul>
+			<ul>
+				<div class="fleft kai">开通时间:</div>
+				<input class="fleft mouthnum" type="text" value="3" name="buytime">
+				<div class="fleft mouth">个月</div>
+			</ul>       
+			<ul>
+				<div class="fleft kai">开通方式:</div>
+				<div class="fleft paybao">支付宝</div>
+			</ul>
+			<ul>
+				<div class="fleft kai">应付金额:</div>
+				<div class="fleft yuan"><i>30</i></div>&nbsp;&nbsp;元
+			</ul>
+			<ul>
+				<button class="fleft payow">立即支付</button>
+			</ul>
+		</form>	
+		</div>
+		<div id="wenxin">
+			<ul>
+				<li class="action">温馨提示：</li>
+				<li class="notice">1、若您的微博会员有效期已达上限，则不能续费。</li>
+				<li class="notice">2、若您为手机包月用户，则本次支付的会员时长将在退订手机包月后延续。</li>
+				<li class="notice">4、支付宝自动续费金额为扣款当日的会员原价9折。</li>
+			</ul>
+		</div>
+	</div>
+<!--==========内容主体结束==========-->
+<script>
+   
+
+
+</script>
+<!--==========底部==========-->
+<include file='Common:bottom'/>

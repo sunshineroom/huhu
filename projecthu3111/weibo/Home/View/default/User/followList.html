@@ -1,0 +1,67 @@
+<include file='Common:header'/>
+	<title>{$Think.config.WEBNAME}-关注列表页</title>
+	<link rel="stylesheet" href="__PUBLIC__/Home/Theme/{$style}/Css/nav.css" />
+	<link rel="stylesheet" href="__PUBLIC__/Home/Theme/{$style}/Css/list.css" />
+	<link rel="stylesheet" href="__PUBLIC__/Home/Theme/{$style}/Css/bottom.css" />
+	<script type="text/javascript" src='__PUBLIC__/Home/Js/jquery-1.8.3.min.js'></script>
+    <script type="text/javascript" src='__PUBLIC__/Home/Js/nav.js'></script>
+    <script type='text/javascript'>
+    var followdel = '{:U("Home/Search/followdel")}';
+    var follow = '{:U("Home/Search/follow")}';
+    var groupadd = '{:U("Home/Search/groupadd")}';
+    var groupadd = '{:U("Home/Search/groupadd")}';
+    </script>
+<!--==========顶部固定导行条==========-->
+<include file='Common:nav'/>
+<!--==========顶部固定导行条==========-->
+<!--==========内容主体==========-->
+	<div style='height:60px;opcity:10'></div>
+    <div class="main">
+    <!--=====左侧=====-->
+        <include file='Common:left'/>
+    <!--=====右侧=====-->
+    	<div id='right'>
+    		<p class='total'><if condition='$type'>您关注了{$count}人<else/>已有{$count}人关注了你</if></p>
+    		<ul>
+            <foreach name='users' item='v'>
+    			<li>
+					<dl class='list-left'>
+						<dt>
+							<img src="<if condition='$v["face50"]'>__PUBLIC__/{$v.face50}<else/>__PUBLIC__/Images/noface.gif</if>" width='50' height='50'/>
+						</dt>
+						<dd>
+							<a href="{:U('Home/User/index',array('uid'=>$v['uid']))}">{$v.username}</a>
+						</dd>
+						<dd>
+							<i class='icon icon-<if condition="$v['sex'] eq '男'">boy<else/>girl</if>'></i>&nbsp;
+							<span>{$v.location}</span>
+						</dd>
+						<dd>
+							<span>关注 <a href="{:U('Home/User/followList',array('follow'=>$v['uid']))}">{$v.follow}</a></span>
+							<span class='bd-l'>粉丝 <a href="{:U('Home/User/fansList',array('fans'=>$v['uid']))}">{$v.fans}</a></span>
+							<span class='bd-l'>微博 <a href="{:U('Home/User/index',array('uid'=>$v['uid']))}">{$v.weibo}</a></span>
+						</dd>
+					</dl>
+    				<dl class='list-right'>
+    					<if condition='$v["mutual"]'>
+                        <dt>互相关注</dt>
+                            <dd class='del-follow' uid='{$v.uid}' type='1'>移除</dd>
+                        <elseif condition='$v["followed"]' />
+                            <dt>√&nbsp;已关注</dt>
+                            <dd class='del-follow' uid='{$v.uid}' type='1'>移除</dd>
+                        <else/>
+                            <dt class='add-fl' uid='{$v.uid}'>+&nbsp;关注</dt>
+                        </if>
+    				</dl>
+    			</li>
+            </foreach>
+    		</ul>
+            <div id="pageStylegg">
+                {$page}
+            </div>
+        </div>
+        <!-- 分页样式 -->
+       
+    </div><!--endmain-->
+<!--==========内容主体结束==========-->
+<include file='Common:bottom'/>

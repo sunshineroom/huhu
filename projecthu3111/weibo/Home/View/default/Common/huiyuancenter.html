@@ -1,0 +1,87 @@
+<include file='Common:header'/>
+    <title>{$Think.config.WEBNAME}-首页</title>
+    <link rel="stylesheet" href="__PUBLIC__/Home/Theme/default/Css/nav.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Home/Theme/default/Css/index.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Home/Theme/default/Css/bottom.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Home/Uploadify/uploadify.css"/>
+    <script type="text/javascript" src='__PUBLIC__/Home/Js/jquery-1.8.3.min.js'></script>
+    <script type="text/javascript" src='__PUBLIC__/Home/Js/nav.js'></script>
+    <script type="text/javascript" src='__PUBLIC__/Home/Uploadify/jquery.uploadify.min.js'></script>
+    <script type="text/javascript" src='__PUBLIC__/Home/Js/index.js'></script>
+    <script type='text/javascript'>
+        var PUBLIC = '__PUBLIC__';
+        var uploadUrl = '{:U("Home/Common/uploadPic")}';
+        var uid = '{$_SESSION["uid"]}';
+        var getWeibo = '{:U("Home/Index/getWeibo")}';
+        var getTurnWeibo = '{:U("Home/Index/getTurnWeibo")}'
+        var clickZan = '{:U("Home/Common/clickZan")}';
+        var commentUrl = "{:U('Home/common/comment')}";
+        var getComment = '{:U("Home/Common/getComment")}';
+        var keepUrl = '{:U("Home/Common/keep")}';
+        var delWeibo = '{:U("Home/Index/delWeibo")}';
+        //我的
+        var newletter = '{:U("User/newletter")}';
+        var id="id";
+        var local_url = document.location.href; 
+          //获取要取得的get参数位置
+        var get = local_url.indexOf(id +"=");
+        if(get>0){
+              //截取字符串获得id
+            var get_par = local_url.slice(id.length + get + 1); 
+        }else{
+            get_par = '';
+        }
+        //发送ajax来实时发现@我的
+        var atmemeurl = '{:U("Common/atmemeurl")}';
+    </script>
+<include file='Common:nav'/>
+<!--==========内容主体==========-->
+<div style='height:60px;opcity:10'></div>
+    <?php $user = M('userinfo');$user = $user->where('uid='.session("uid"))->select();?> 
+    <div id="huiyuan">
+        <div id="huimain">
+            <div id="welcome">欢迎来到小小微博vip中心</div>
+            <dl class="user_face huiyuanface">
+                <dt>
+                    <a href="{:U('/' . $uid)}">
+                        <img src="<if condition='$face'>__PUBLIC__/{$face}<else/>__PUBLIC__/Home/Images/noface.gif</if>" width='180' height='180' alt="{$username}" />
+                    </a>
+                    <a href="{:U('/' . $uid)}" class="centertou">{$info.username}</a>
+                    <if condition='$vtime eq 1'><a href="{:U('/' . $uid)}" class="huiyuantoux centertouxiang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></if>
+                </dt>
+                <dd class="fleft">
+                </dd>
+            </dl>
+        <if condition='$vtime eq 1'>
+            <ul>
+                <div class="daoqi">您的vip将在<i style="color:red;font-size:25px">{$day}</i>天后到期</div>
+            </ul>
+            <ul>
+                <a href="{:U('Home/Common/huiyuan')}"><button class="fleft payow">继续续加</button></a>
+            </ul>
+        <else/>
+            <ul>
+                <div class="daoqi">您还不是vip会员</div>
+            </ul>
+            <ul>
+                <a href="{:U('Home/Common/huiyuan')}"><button class="fleft payow">立即开通</button></a>
+            </ul>
+        </if>   
+        </div>
+        <div id="wenxin">
+            <ul>
+                <li class="action">温馨提示：</li>
+                <li class="notice">1、若您的微博会员有效期已达上限，则不能续费。</li>
+                <li class="notice">2、若您为手机包月用户，则本次支付的会员时长将在退订手机包月后延续。</li>
+                <li class="notice">4、支付宝自动续费金额为扣款当日的会员原价9折。</li>
+            </ul>
+        </div>
+    </div>
+<!--==========内容主体结束==========-->
+<script>
+   
+
+
+</script>
+<!--==========底部==========-->
+<include file='Common:bottom'/>

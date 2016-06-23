@@ -1,0 +1,123 @@
+<extend name="Public/index"/>
+<block name="content">
+  <div id="page-wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">
+          <small>前台用户: </small> <img src="__PUBLIC__{$info.face50}" alt=""> {$info.username}<small>的详细信息</small>
+          
+        </h1>
+        <a href="{:U('Admin/Homeuser/index')}" class="btn btn-danger">返回用户列表</a>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <!-- DataTables Advanced Tables -->
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <div class="dataTable_wrapper">
+              <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="row">
+                  <div class="col-sm-12">
+                  <!-- 用户列表遍历 -->
+                    <table id="dataTables-example" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dataTables-example_info">
+                      <thead>
+                        <tr role="row">
+                          <th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">用户ID</th>
+
+                          <th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;" aria-label="Browser: activate to sort column ascending">用户昵称</th>
+
+                          <th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;" aria-label="Platform(s): activate to sort column ascending">真实姓名</th>
+
+                           <th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;" aria-label="Platform(s): activate to sort column ascending">所在地</th>
+                         
+                          <th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">星座</th>
+
+                        </tr>
+                      </thead>
+                      <tbody> 
+                          <tr class="gradeA odd" role="row">
+                            <td>{$info.uid}</td>
+                            <td>{$info.username}</td>
+                            <td>{$info.truename}</td>
+                            <td width="100px">{$info.location}</td>
+                            <td>{$info.constellation}</td>
+                          </tr>
+                    
+                      </tbody>
+                    </table>
+
+                    <table id="dataTables-example" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dataTables-example_info">
+                      <thead>
+                        <tr role="row">
+                          <th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width:100px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">用户头像</th>
+
+                          <th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;" aria-label="Browser: activate to sort column ascending">用户关注数</th>
+
+                          <th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;" aria-label="Platform(s): activate to sort column ascending">用户粉丝数</th>
+
+                           <th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;" aria-label="Platform(s): activate to sort column ascending">发布微博数</th>
+                         
+                          <th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;" style="text-align:center">用户个人简介</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody> 
+                          <tr class="gradeA odd" role="row" >
+                            <td width="100px"><img src="__PUBLIC__{$info.face80}" alt=""></td>
+                            <td>{$info.follow}</td>
+                            <td>{$info.fans}</td>
+                            <td>{$info.weibo}</td>
+                            <td>{$info.intro}</td>
+                          </tr>
+                    
+                      </tbody>
+                    </table>
+                  
+                  </div>
+                </div>
+                <div class="row">
+                  <style type="text/css">
+                      #pages a,#pages span{ background-color: #fff;
+                              border: 1px solid #ddd;
+                              color: #337ab7;
+                              float: left;
+                              line-height: 1.42857;
+                              margin-left: -1px;
+                              padding: 6px 12px;
+                              position: relative;
+                              text-decoration: none;}
+                      #pages span {
+                            background-color: #337ab7;
+                            border-color: #337ab7;
+                            color: #fff;
+                            cursor: default;
+                            z-index: 2;
+                            }
+                  </style>
+                 
+                  <div class="col-sm-6">
+                    <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                       <div id="pages">
+                          {$pages}
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.table-responsive -->
+
+          </div>
+          <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+  </div>
+</block>

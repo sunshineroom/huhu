@@ -1,0 +1,55 @@
+<extend name="Public/index"/>
+<block name="content">
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">广告修改</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+   <div class="row">
+                   <div class="col-lg-12">
+                       <div class="panel panel-default">
+                           <div class="panel-heading">
+                               请修改表单内的内容~
+                           </div>
+                           <div class="panel-body">
+                               <div class="row">
+                                   <div class="col-lg-6">
+                                       <form role="form" action="{:U('Admin/Advert/update')}" method="post" enctype="multipart/form-data">
+                                           <input type="hidden" name="id" value="{$info.id}">
+                                           
+                                           <div class="form-group">
+                                               <label>广告名称</label>
+                                               <input name="name" value="{$info.name}" class="form-control">
+                                           </div>
+                                           <div class="form-group">
+                                               <input type="file"  class="col-xs-10 col-sm-5" name='pic' /><span>(请上传宽300,长150左右的广告图片)</span>
+                                           </div>
+                                           <div class="form-group">
+                                              <input type="radio" name="status" <?php echo $info['status'] == 1? 'checked':''; ?> value="1">展示
+                                              <input type="radio" name="status" <?php echo $info['status'] == 0? 'checked':''; ?> value="0">不展示
+                                           </div>
+                                           <div class="form-group">
+                                              <label>广告简介:</label><br>
+                                              <textarea style="width:100%;height:100px;" name="content" >{$info.content}</textarea>
+                                           </div>
+                                           <button class="btn btn-warning" type="reset">重置</button>
+                                           <button class="btn btn-info" type="submit">提交</button>
+                                       </form>
+                                   </div>
+                             <!--   http://localhost/Class/s43/project/index.php/Admin/User/add.html
+                               http://localhost/Class/s43/project/index.php/Admin/User/add.shtml
+                               lamp43/Admin/User/add
+                               lamp43/Admin/User/add.html -->
+                               </div>
+                               <!-- /.row (nested) -->
+                           </div>
+                           <!-- /.panel-body -->
+                       </div>
+                       <!-- /.panel -->
+                   </div>
+                   <!-- /.col-lg-12 -->
+               </div>
+</div>
+</block>

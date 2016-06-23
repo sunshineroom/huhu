@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>重置密码</title>
+	<link rel="stylesheet" href="__PUBLIC__/Home/Css/regis.css" />
+	<script type="text/javascript" src="__PUBLIC__/Home/Js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/Js/resetPwd.js"></script>
+	<script type='text/javascript'>
+		var checkAccount = "{:U('checkAccount')}";
+		var checkUname = "{:U('checkUname')}";
+		var checkVerify = "{:U('checkVerify')}";
+	</script>
+	<style type="text/css">
+		.cur{ border:solid 1px green; }
+		.error{ border:solid 1px red; }
+	</style>
+</head>
+<body>
+	<div id='logo'></div>
+	<div id='reg-wrap'>
+		<form action="{:U('Home/Login/reset')}" method='post' name='register'>
+			<fieldset>
+				<legend>用户重置密码</legend>
+				<p>
+					<label for="account">您的邮箱账号:</label>
+					<input type="text" value="<?php echo $_GET['account'] ?>" class='input' name="account" disabled='disabled'/>
+					<input type="hidden"  value="<?php echo $_GET['account'] ?>"  name="account"/>
+				</p>
+				<p>
+					<label for="pwd">重置密码</label>
+					<input type="password" name='password' id='pwd' class='input' readmin=" *请输入6-18位密码"/><span></span>
+				</p>
+				<p>
+					<label for="pwded">确认密码：</label>
+					<input type="password" name='pwded' class='input' readmin=" *请确认密码"/><span></span><span></span>
+				</p>
+				<p class='run'>
+
+					<input type="submit" value='马上重置' id='regis'/>&nbsp;&nbsp;&nbsp;
+					<a href="{:U('Home/Login/register')}" >没有账号,即可注册 </a>
+				</p>
+			</fieldset>
+		</form>	
+	</div>
+</body>
+</html>

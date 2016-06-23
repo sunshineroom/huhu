@@ -1,0 +1,151 @@
+/* 
+* @Author: Sunshie
+* @Date:   2014-11-03 17:10:14
+* @Last Modified by:   Sunshie
+* @Last Modified time: 2014-11-11 09:16:57
+* 微博用户登陆css文件
+*/
+*{
+    margin:0px;
+    padding:0px;
+    list-style: none;
+    text-decoration: none;
+    font-family: Microsoft Yahei,Simsun,Tahoma;
+}
+body{
+    background:url(../images/bg_3.jpg) no-repeat;
+    background-size:auto;
+}
+.logo{
+    width:1000px;
+    height:38px;
+    margin:0 auto;
+    margin-top: 60px;
+}
+.login{
+    width:1000px;
+    height:423px;
+    margin:27px auto;
+}
+.login>div:first-child{
+    float:left;
+    width:600px;
+    height:100%;
+    background:#F4F4F4;
+}
+.login>div:last-child{
+    float:left;
+    width:400px;
+    height:100%;
+    background: #FFFFFF;
+}
+.login>div:first-child>h1{
+    font-size: 16px;
+    color:#555;
+    font-weight: normal;
+    width:556px;
+    margin: 27px auto 10px auto;
+}
+.cimg{
+    width:556px;
+    margin: 0px auto;
+}
+.cimg>a>img{
+    height:258px;
+    width:128px;
+    float:left;
+}
+.cimg>div{
+    width:556px;
+}
+.top>a>img{
+    width:128px;
+    height:128px;
+    float: left;
+    margin-left:3px;
+}
+.bottom>a:first-child>img:first-child{
+    width:260px;
+    height:128px;
+    float: left;
+    margin-left:3px;
+    margin-top:3px; 
+}
+.bottom>a:last-child>img:last-child{
+    width:128px;
+    height:128px;
+    float: left;
+    margin-top:3px; 
+    margin-left:3px;
+}
+
+.login>div:last-child>h1{
+    width:370px;
+    height:40px;
+    margin: 22px auto;
+    font-weight: normal;
+    font-size: 22px;
+    text-indent: 10px;
+    color:#444;
+}
+.form{
+    width:370px;
+    margin: 0px auto;
+}
+form>div{
+    width:261px;
+    margin: 0 auto;
+    margin-top:17px;
+}
+input[type="text"],input[type="password"]{
+    width:260px;
+    height:38px;
+    border:1px solid #ccc;
+    border-radius:4px;
+    text-indent: 5px;
+    font-size:15px;
+}
+input[type="chekbox"]{
+    height: 18px;
+    width: 18px;
+}
+.remembe{
+    font-size:13px;
+}
+button{
+    width:113px;
+    height:35px;
+    /*background: #74CA1B;*/
+    background: url(../images/icon.png) no-repeat 0 -90px;
+    border:0.9px solid #5BBB1D;
+    border-radius:4px;
+    color:#fff;
+    font-size:18px;
+}
+button:hover{
+    background: #5BBB1D;
+}
+.error{
+    padding-left: 5px;
+    border: 1px solid #dad699;
+    background: #f9f5c7;
+    border-radius: 2px;
+    display: none;
+    line-height: 25px;
+    font-size:12px;
+    width: 250px;
+    height:25px;
+    margin: 0px auto;
+
+}
+.foo{
+    float:right;
+    font-size:12px;
+}
+.foo>a{
+    color:#555;
+}
+#vcode~a{
+    font-size:14px;
+    color:#999;
+}

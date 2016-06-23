@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>微博找人</title>
+	<link rel="stylesheet" href="__PUBLIC__/Home/Theme/{$style}/Css/nav.css" />
+	<link rel="stylesheet" href="__PUBLIC__/Home/Theme/{$style}/Css/sech_user.css" />
+	<link rel="stylesheet" href="__PUBLIC__/Home/Theme/{$style}/Css/bottom.css" />
+	<script type="text/javascript" src='__PUBLIC__/Home/Js/jquery-1.8.3.min.js'></script>
+    <script type="text/javascript" src='__PUBLIC__/Home/Js/nav.js'></script>
+    <script type="text/javascript" src='__PUBLIC__/Home/Js/sechuser.js'></script>
+<!-- nav -->
+<include file='Common:nav'/>
+<!--==========内容主体==========-->
+	<div style='height:60px;opcity:10'></div>
+    <div class="main">
+    <!--=====左侧=====-->
+        <!--=====左侧=====-->
+    <div id="left" class='fleft'>
+        <ul class='left_nav'>
+            <li><a href="{:U('Index/index')}"><i class='icon icon-home'></i>&nbsp;&nbsp;首页</a></li>
+            <li><a href="{:U('User/atme')}"><i class='icon icon-at'></i>&nbsp;&nbsp;提到我的</a></li>
+            <li><a href="{:U('User/comment')}"><i class='icon icon-comment'></i>&nbsp;&nbsp;评论</a></li>
+            <li><a href="{:U('User/letter')}"><i class='icon icon-letter'></i>&nbsp;&nbsp;私信</a></li>
+            <li><a href="{:U('User/keep')}"><i class='icon icon-keep'></i>&nbsp;&nbsp;收藏</a></li>
+        </ul>
+        <div class="group">
+            <fieldset><legend>分组</legend></fieldset>
+            <ul class="addgrouplist">
+                <php>
+                    $group = M("group")->where(array('uid' => session('uid')))->limit(5)->select();
+                </php>
+                 <li><a href="{:U('Search/sechUser')}"><i class='icon icon-group'></i>&nbsp;&nbsp;全部</a></li>
+                <foreach name='group' item='v'>
+                    <li>
+                        <a href="{:U('Search/sechGroup', array('gid' => $v['id']))}"><i class='icon icon-group'></i>&nbsp;&nbsp;{$v.name}</a>
+                    </li>
+                </foreach>
+            </ul>
+            <span id='create_group'>创建新分组</span>
+        </div>
+    </div>
+    
+    <!--==========创建分组==========-->
+    <script type='text/javascript'>
+        var addGroup = "";
+    </script>
+    <div id='add-group'>
+        <div class="group_head">
+            <span class='group_text fleft'>创建好友分组</span>
+        </div>
+        <div class='group-name'>
+            <span>分组名称：</span>
+            <input type="text" name='name' id='gp-name'>
+        </div>
+        <div class='gp-btn-wrap'>
+            <span class='add-group-sub'>添加</span>
+            <span class='group-cencle'>取消</span>
+        </div>
+    </div>
+    <!--==========创建分组==========-->
+        <div id='right'>
+    		<p id='sech-logo'></p>
+    		<div id='sech'>
+    			<div>
+	    			<form action="{:U("Home/Search/sechUser")}" method='get' name='search'>
+	    				<input type="text" name='keyword' id='sech-cons' value='<if condition="$keyword">{$keyword}<else/>搜索微博、找人</if>'/>
+	    				<input type="submit" value='搜&nbsp;索' id='sech-sub'/>
+	    			</form>
+    			</div>
+    			<ul>
+                    <li><span class='cur sech-type' url="{:U('sechUser')}">找人</span></li>
+    				<li><span class='sech-type' url="{:U('sechWeibo')}">微博</span></li>
+    			</ul>
+    		</div>
+    		<if condition="isset($result)">
+    		<div id='content'>
+    			<if condition='$result'>
+	    		<div class='view_line'>
+	                <strong>用户</strong>
+	            </div>
+	            <ul>
+	            	<foreach name='result' item='v'>
+	    			<li class="jiafensi">
+						<dl class='list-left'>
+							<dt>
+								<img src="
+								<if condition='$v["face80"]'>
+									__PUBLIC__/{$v.face80}
+								<else/>
+									__PUBLIC__/Home/Images/noface.gif
+								</if>" width='80' height='80'/>
+							</dt>
+							<dd>
+								<a href="{:U('Home/User/index',array('uid'=>$v['uid']))}">{$v.username|str_replace=$keyword, '<font style="color:red">' . $keyword . '</font>', ###}</a>
+							</dd>
+							<dd>
+								<i class='icon icon-boy'></i>&nbsp;
+								<span>
+									
+								</span>
+							</dd>
+							<dd>
+								<span>关注 <a href="{:U('Home/User/followList',array('follow'=>$v['uid']))}">{$v.follow}</a></span>
+                                <span class='bd-l'>粉丝 <a href="{:U('Home/User/fansList',array('fans'=>$v['uid']))}">{$v.fans}</a></span>
+                                <span class='bd-l'>微博 <a href="{:U('Home/User/index',array('uid'=>$v['uid']))}">{$v.weibo}</a></span>
+							</dd>
+						</dl>
+	    				<dl class='list-right'>
+	    					<if condition='$v["mutual"]'>
+	    						<dt>互相关注</dt>
+	    						<dd class='del-follow' uid='{$v.uid}' type='1'>移除</dd>
+    						<elseif condition='$v["followed"]' />
+                            	<dt>√&nbsp;已关注</dt>
+                            	<dd class='del-follow' uid='{$v.uid}' type='1'>移除</dd>
+                        	<else/>
+	    						<dt class='add-fl' uid='{$v.uid}'>+&nbsp;关注</dt>
+	    					</if>
+	    				</dl>
+	    			</li>
+	    			</foreach>
+    			</ul>
+    			<div style="text-align:center;padding:20px;">{$page}</div>
+    			<else/>
+    				<p style='text-indent:7em;'>未找到与<strong style='color:red'>{$keyword}</strong>相关的用户</p>
+    			</if>
+	        </div>
+	    	</if>
+        </div>
+    </div>
+            <div id="pageStylegg">
+                {$page}
+            </div>
+<!--==========内容主体结束==========-->
+<!--==========底部==========-->
+<include file='Common:bottom'/>
